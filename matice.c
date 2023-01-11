@@ -3,6 +3,7 @@
 
 #define maxArr 100
 
+//načti m×n prvků do 2D pole ze standardního vstupu, ze souboru
 void nactiPoleSoubor(FILE *f, int pole[][maxArr]){
     int x, y;
     fscanf(f,"%d %d", &x, &y);
@@ -22,6 +23,7 @@ void nactiPoleVstup(int pole[][maxArr]){
             scanf("%d", &pole[i][j]);
 }
 
+//vypiš výsledné pole na standardní výstup, do souboru
 void vypisPole(int pole[maxArr][maxArr], int x, int y){
     printf("\n");
     for(int i=0; i<x; i++){
@@ -32,6 +34,16 @@ void vypisPole(int pole[maxArr][maxArr], int x, int y){
     }
 }
 
+void vypisPoleSoubor(FILE *f, int pole[][maxArr], int x, int y){
+    for(int i=0; i<x; i++){
+        for(int j=0; j<y; j++){
+            fprintf(f, "%d ", pole[i][j]);
+        }
+        fprintf(f, "\n");
+    }
+}
+
+//zjisti počet sudých prvků v každém sloupci a zapiš jej do posledního řádku v tomto sloupci
 void pocetSudych(int pole[][maxArr], int x, int y){
     for(int i=0; i<x; i++){
         int counter=0;
@@ -43,6 +55,7 @@ void pocetSudych(int pole[][maxArr], int x, int y){
     }
 }
 
+//zjisti součet všech prvků na obvodu matice a pak všech prvků kromě obvodových
 int soucetObvodovych(int pole[][maxArr], int x, int y){
     int soucet=0;
     for(int i=0; i<x; i++){
@@ -66,6 +79,7 @@ int soucetNeobvodovych(int pole[][maxArr], int x, int y){
     return soucet - soucetObvodovych(pole, x, y);
 }
 
+//zjisti součet prvků ve čtvrtinách matice, když každý rozměr rozdělíš celočíselným dělením 2
 int* soucetCtvrtin(int pole[][maxArr], int x, int y){
     int vysledky[4];
     for(int i=0; i<x; i++){
@@ -82,6 +96,7 @@ int* soucetCtvrtin(int pole[][maxArr], int x, int y){
     return vysledky;
 }
 
+//zjisti, zda je matice vertikálně, či horizontálně symetrická
 bool jeHorizontalneSymetricka(int pole[][maxArr], int x, int y){
     for(int i=0; i<x/2; i++){
         for(int j=0; j<y; j++){
@@ -100,6 +115,7 @@ bool jeVertikalneSymetricka(int pole[][maxArr], int x, int y){
     return true;
 }
 
+//vytvoř transponovanou matici
 void transposeMatrix(int pole[][maxArr], int x, int y){
     for(int i=0; i<x; i++){
         for(int j=0; j<i; j++){
@@ -110,6 +126,7 @@ void transposeMatrix(int pole[][maxArr], int x, int y){
     }
 }
 
+//vytvoř matici otočenou o 90, 180, 270 stupňů (zadej počet otočení o 90 stupňů parametrem)
 void rotateMatrix(int pole[][maxArr], int x, int y, int degrees){
     for(int i=0; i<degrees/90; i++){
         transposeMatrix(pole, x, y);
