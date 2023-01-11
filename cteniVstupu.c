@@ -49,6 +49,15 @@ void histogram(){
     for(int i=0; i<26; i++) printf("%d ", vysledky[i]);
 }
 
+//Vytvoř funkci realizující textovou nabídku, která bude vracet znaky A, B, K,
+//X s významem A – Volba A, B – Volba B, K – Konec, X – Neznámá volba (bude to
+//vracet při neočekávané volbě). Použij ji pro komunikaci s uživatelem dokud ne-
+//zvolí ukončení programu.
+void textovaNabidka(){
+    
+}
+
 int main(){
+
     return 0;
 }
