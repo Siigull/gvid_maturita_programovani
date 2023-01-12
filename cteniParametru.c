@@ -49,6 +49,7 @@ void nahradVyskyt(char x, char y, char pole[N]){
     }
 }
 
+//skryj v řetězci každé číslo přepsáním pomocí znaku #
 void nahradCislice(char* pole){
     char result[N];
     int j=0;
@@ -62,7 +63,6 @@ void nahradCislice(char* pole){
             result[j] = pole[i];
         }
         if(pole[i] == '\0') break;
-        printf("%c", pole[j]);
         j++;
     }
 }
