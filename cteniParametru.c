@@ -67,9 +67,32 @@ void nahradCislice(char* pole){
     }
 }
 
+//vrať počet slov v řetězci
+int pocetSlov(char* pole){
+    int pocet = 0;
+    for(int i=0; i<N; i++){
+        if(pole[i] == '\0') break;
+        if((pole[i] < 91 && pole[i] > 64) || (pole[i] < 123 && pole[i] > 96)){
+            pocet++;
+            while((pole[i] < 91 && pole[i] > 64) || (pole[i] < 123 && pole[i] > 96)) i++;
+            i--;
+        }
+    }
+    return pocet;
+}
+
+//nahraď v řetězci malá písmena za velká, nebo velká za malá
+void nahradVelikost(char* pole){
+    for(int i=0; i<N; i++){
+        if(pole[i] == '\0') break;
+        if(pole[i] < 91 && pole[i] > 64) pole[i] -= 32;
+        if(pole[i] < 123 && pole[i] > 96) pole[i] += 32;
+    }
+}
+
 int main(int argc, char **argv){
     
-    char* vstupniRetezec = argv[argc-1];
+    char* vstupniRetezec = argv[argc - 1];
     // char nahrazeny, nahraditel;
 
     // if(argc == 4){
