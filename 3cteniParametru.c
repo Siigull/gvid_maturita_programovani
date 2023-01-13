@@ -13,8 +13,7 @@ void nactiNznaku(char pole[N], char* vstup){
 //vrať počet číslic v řetězci
 int pocetCislic(char pole[N]){
     int counter = 0;
-    for(int i=0; i<N; i++){
-        if(pole[i] == '\0') break;
+    for(int i=0; i<N || pole[i] != '\0'; i++){
         if(pole[i] > 47 && pole[i] < 58) counter++;
     }
     return counter;
@@ -26,8 +25,7 @@ int* indexyCislic(char pole[N]){
     vysledky[0] = 0; vysledky[1] = 0;
 
     int strLen = 0;
-    for(int i=0; i<N; i++){
-        if(pole[i] == '\0') break;
+    for(int i=0; i<N || pole[i] != '\0'; i++){
         if(pole[i] > 47 && pole[i] < 58) vysledky[0] = i;
         strLen++;
     }
@@ -43,8 +41,7 @@ int* indexyCislic(char pole[N]){
 
 //nahraď v řetězci každý výskyt znaku x znakem y (x a y jsou parametry funkce)
 void nahradVyskyt(char x, char y, char pole[N]){
-    for(int i=0; i<N; i++){
-        if(pole[i] == '\0') break;
+    for(int i=0; i<N || pole[i] != '\0'; i++){
         if(pole[i] == x) pole[i] = y;
     }
 }
@@ -70,8 +67,7 @@ void nahradCislice(char* pole){
 //vrať počet slov v řetězci
 int pocetSlov(char* pole){
     int pocet = 0;
-    for(int i=0; i<N; i++){
-        if(pole[i] == '\0') break;
+    for(int i=0; i<N || pole[i] != '\0'; i++){
         if((pole[i] < 91 && pole[i] > 64) || (pole[i] < 123 && pole[i] > 96)){
             pocet++;
             while((pole[i] < 91 && pole[i] > 64) || (pole[i] < 123 && pole[i] > 96)) i++;
@@ -83,8 +79,7 @@ int pocetSlov(char* pole){
 
 //nahraď v řetězci malá písmena za velká, nebo velká za malá
 void nahradVelikost(char* pole){
-    for(int i=0; i<N; i++){
-        if(pole[i] == '\0') break;
+    for(int i=0; i<N || pole[i] != '\0'; i++){
         if(pole[i] < 91 && pole[i] > 64) pole[i] -= 32;
         if(pole[i] < 123 && pole[i] > 96) pole[i] += 32;
     }
