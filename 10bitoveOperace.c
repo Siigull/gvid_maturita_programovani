@@ -18,16 +18,16 @@ u_int16_t bitPosun(u_int16_t x, u_int16_t N){
 }
 
 u_int16_t bitRotace(u_int16_t x, u_int16_t N){
-    N %= sizeof(u_int16_t)*8;
-    if(N < 0) return (x << -N) | (x >> (sizeof(u_int16_t)*8 + N));
-    else return (x >> N) | (x << (sizeof(u_int16_t)*8 - N));
+    N %= 16;
+    if(N < 0) return (x << -N) | (x >> (16 + N));
+    else return (x >> N) | (x << (16 - N));
 }
 
 //asi nevim co je aritmeticky soucet f
 
 void vypisDvojkova(u_int16_t x){
     printf("%d\n", x);
-    for(u_int16_t i=sizeof(u_int16_t)*8; i>0; i--){
+    for(int i=16; i>0; i--){
         printf("%d", x >> (i-1) & 1);
     }
     printf("\n");
