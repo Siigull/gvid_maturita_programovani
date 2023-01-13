@@ -27,22 +27,34 @@ void nactiPolynom(float polynom[maxRad], int n){
 void radaCisel(){
     int c, pole[N];
     int i = 0;
-    while (!scanf("%d", &c)){
+    while (scanf("%d", &c)){
         pole[i] = c;
         i++; i%=N;
     }
+    int soucet = pole[i];
+    //postupne
+    printf("%d ", pole[i]);
+    for(int j=i+1; j!=i; j++){
+        if(j==N) j = 0;
+        soucet += pole[j];
+        printf("%d ", pole[j]);
+    }
+    //součet
+    printf("\n%d \n", soucet);
+    //naopak
     for(int j=i-1; j!=i; j--){
         if(j==-1) j = N-1;
         printf("%d ", pole[j]);
     }
     printf("%d ", pole[i]);
+
 }
 
 //čti vstup neznámé délky po znacích a vrať pole reprezentující histogram, poté
 //z něj vypiš absolutní četnosti malých znaků anglické abecedy (počty znaků na vstupu)
 void histogram(){
-    int c, vysledky[26];
-    while (c = getc(stdin) != EOF){
+    char c, vysledky[26];
+    while (scanf("%c\n", &c)){
         c -= 97;
         if(c >= 0 && c < 26) vysledky[c]++;
     }
@@ -54,10 +66,30 @@ void histogram(){
 //vracet při neočekávané volbě). Použij ji pro komunikaci s uživatelem dokud ne-
 //zvolí ukončení programu.
 void textovaNabidka(){
-    
+    char userInput;
+    printf("Zadej volbu: ");
+    while (1){
+        userInput = getc(stdin);
+        getc(stdin);
+        switch(userInput){
+            case 'A':
+                printf("A");
+                break;
+            case 'B':
+                printf("B");
+                break;
+            case 'X':
+                printf("konec");
+                return;
+            default:
+                printf("neznama volba");
+                break;
+        }
+        printf("\nZadej volbu: ");
+    }
 }
 
 int main(){
-
+    textovaNabidka();
     return 0;
 }
