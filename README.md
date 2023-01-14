@@ -1,1 +1,3 @@
+7, 9 jsem prozatím přeskočil
+13 je dost špatně počítá s tím, že jsou data v soubourech seřazené a id je nula až počet prvků, ale jsem moc línej vytvářet hashtable...
 bla bla bla
