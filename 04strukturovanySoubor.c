@@ -52,10 +52,10 @@ void nactiSoubor(Tseznam* sopky, FILE *f){
 }
 
 //Vytvoř funkci vracející průměrnou výšku všech ne/aktivních sopek (vybere se pa-rametrem).
-float prumerVysek(Tseznam *s, bool aktivni){
+float prumerVysek(Tseznam *s, int aktivni){
     int soucet=0, pocet=0;
     for(int i=0; i<s->delka; i++){
-        if(s->sopky[i]->aktivni == aktivni){
+        if(s->sopky[i]->aktivni == aktivni || aktivni == -1){
             pocet++;
             soucet += s->sopky[i]->vyska;
         }
@@ -68,6 +68,11 @@ float prumerVysek(Tseznam *s, bool aktivni){
 void vypisSopku(Tsopka *s){
     if(s->aktivni) printf("%s je aktivni\n", s->nazev);
     else printf("%s neni aktivni\n", s->nazev);
+}
+
+void vypisJmeno(Tsopka *s){
+    if(s->aktivni) printf("%s\n", s->nazev);
+    else printf("%s\n", s->nazev);
 }
 
 void jeVyssi(Tseznam *s, int vyska){
@@ -93,6 +98,18 @@ void dvaSoubory(Tseznam *s){
     }
 }
 
+// V tabulce (souboru) jsou záznamy o sopkách s atributy název (20 znaků), výška
+// (v metrech), zda je aktivní (ano/ne). Vytvoř podprogram pro výpis všech záznamů
+// o nad/podprůměrně (parametr) vysokých ne/aktivních (parametr) sopkách.
+void prumernost(Tseznam* s, int nadprumer, int aktivni){
+    float prumer = prumerVysek(s, -1);
+    for(int i=0; i<s->delka; i++){
+        if((nadprumer == (s->sopky[i]->vyska > prumer)) || nadprumer == -1)
+            if(aktivni == s->sopky[i]->aktivni || aktivni == -1) 
+                vypisSopku(s->sopky[i]);
+    }
+}
+
 int main(){
     Tseznam* sopky = vytvorSeznam();
     char cesta[100];
@@ -100,5 +117,6 @@ int main(){
     FILE *f = fopen("sopky.txt", "r");
     if(f == NULL) return 1;
     nactiSoubor(sopky, f);
+
     return 0;
 }
