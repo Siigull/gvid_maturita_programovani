@@ -44,11 +44,11 @@ void mergeSort(int* pole, int n){
 
     int n1 = n/2;
     mergeSort(pole, n1);
-    
+
     int n2 = n - n1;
     mergeSort(pole + n1, n2);
 
-    // ---------------------uloha---------------------
+    // -------------------------uloha-------------------------
     int i=0, j=0, res[n];
     while(i < n1 && j < n2)
         if(pole[i] < pole[n1+j]) { res[i+j] = pole[i]; i++; }
@@ -58,7 +58,7 @@ void mergeSort(int* pole, int n){
     for(; j<n2; j++) res[i+j] = pole[n1+j];
 
     for(int a=0; a<n; a++) pole[a] = res[a];
-    // ---------------------uloha---------------------
+    // -------------------------uloha-------------------------
 }
 
 int main(){
