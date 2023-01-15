@@ -55,7 +55,7 @@ Tmatice* nactiM(){
 // Ověř, zda načtená matice může být maticí koeficientů soustavy lineárních rovnic
 // (stačí rozměry).
 bool jeSoustava(Tmatice* m){
-    if(m->vyska+1 == m->delka) return false;
+    if(m->vyska+1 != m->delka) return false;
     return true;
 }
 
