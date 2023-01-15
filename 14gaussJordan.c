@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
-#include <math.h>
 
 typedef struct pole
 {
@@ -65,10 +64,11 @@ void vypisM (Tmatice *m){
 
 void nejvetsiKoeficient(Tmatice *m, int sloupec){
     int index = 0;
-    for(int i = 1; i<m->vyska; i++)
-        if(fabs(m->prvek[i][sloupec]) > fabs(m->prvek[index][sloupec]))
+    for(int i = 1; i<m->vyska; i++){
+        if(m->prvek[i][sloupec] > m->prvek[index][sloupec]){
             index = i;
-
+        }
+    }
     float *temp = m->prvek[0];
     m->prvek[0] = m->prvek[index];
     m->prvek[index] = temp;
@@ -85,50 +85,35 @@ void odectiRadek(Tmatice *m, int radek, int sloupec){
     }
 }
 
-void zpetnyChod(Tmatice* m){
-    for(int i=m->vyska-1; i>=0; i--){
-        for(int j=i+1; j<m->vyska; j++)
-            m->prvek[i][m->vyska] -= m->prvek[j][m->vyska] * m->prvek[i][j];
-        m->prvek[i][m->vyska] /= m->prvek[i][i];
-    }
-    for(int i=0; i<m->vyska; i++)
-        printf("x%d: %f\n", i+1, m->prvek[i][m->vyska]);
-}
-
-// přímý chod Gaussovy metody
-void GEM(Tmatice* m){
-    for(int a=1; a<m->vyska; a++){
-        nejvetsiKoeficient(m, a-1);
-        for(int b=a; b<m->vyska; b++){
-            odectiRadek(m, b, a-1);
+void GJEM(Tmatice* m){
+    for(int a=0; a<m->vyska; a++){
+        nejvetsiKoeficient(m, a);
+        for(int b=0; b<m->vyska; b++){
+            if(a == b) continue;
+            odectiRadek(m, b, a);
         }
     }
 }
 
-// zjištění počtu řešení po přímém chodu Gaussovy metody 1=nekonecno 0=1
-int pocetReseni(Tmatice *m){
-    for(int i=0; i<m->vyska; i++) 
-        if(!m->prvek[i][i]) return 0;
-
-    return 1;
-}
-
-// kontrolu, zda je matice koeficientů ve tvaru po provedení přímého chodu Gaussovy metody
+// kontrolu, zda je matice koeficientů po přímém chodu Gauss-Jordanovy metody
 bool jePoPrimem(Tmatice *m){
-    for(int i=0; i<m->vyska; i++)
-        for(int j=i-1; j>=0; j--)
+    for(int i=0; i<m->vyska; i++){
+        for(int j=0; j<m->vyska; j++){
+            if(i == j) continue;
             if(m->prvek[i][j]) return false;
-
+        }
+    }
     return true;
 }
 
-// provedení zpětného chodu na i-tém řádku (předpokládá se, že na dalších řádcích
-// již výpočet proběhl)
-void zpetnyRadek(Tmatice* m, int i){
-    for(int j=i+1; j<m->vyska; j++)
-        m->prvek[i][m->vyska] -= m->prvek[j][m->vyska] * m->prvek[i][j];
+//provedení zpětného chodu Gauss-Jordanovy metody
+void zpetnyChod(Tmatice* m){
+    
+    for(int i=0; i<m->vyska; i++)
+        m->prvek[i][m->vyska] /= m->prvek[i][i];
 
-    m->prvek[i][m->vyska] /= m->prvek[i][i];
+    for(int i=0; i<m->vyska; i++)
+        printf("x%d: %f\n", i+1, m->prvek[i][m->vyska]);
 }
 
 //3 4 23 4 5 3 3 4 5 3 2 4 5 63
@@ -137,7 +122,7 @@ int main(void)
     Tmatice *matice = nactiM();
 
     vypisM(matice);
-    GEM(matice);
+    GJEM(matice);
     vypisM(matice);
 
     zpetnyChod(matice);
