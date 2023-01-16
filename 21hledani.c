@@ -11,22 +11,39 @@ int binarni(int* pole, int N, int x){
     return -1;
 }
 
-int sekvencni(int N){
-    int pole[N];
+int sekvencniZarazka(int* pole, int N, int x){
+    pole[N] = x;
+    int i=0;
+    while(1){
+        if(pole[i++] == x) return i;
+    }
+}
 
-    for(int i=0; i<N; i++)
-        scanf("%d", &pole[i]);
-
-    int x;
-    scanf("%d", &x);
-
+int sekvencni(int* pole, int N, int x){
     for(int i=0; i<N; i++)
         if(pole[i] == x) return i;
     return -1;
 }
 
+// Ověř pomocí své funkce, zda je vstupní pole seřazeno. Vytvoř podprogram pro
+// vyhledání v tomto poli algoritmem
+int serazeno(int N){
+    int pole[N+1], x;
+    scanf("%d", &pole[0]);
+    for(int i=1; i<N; i++){
+        scanf("%d", &pole[i]);
+        if(pole[i-1] > pole[i]) return -2;
+    }
+    scanf("%d", &x);
+
+    sekvencni(&pole, N, x);
+
+    return binarni(&pole, N, x);
+}
+
 int main(){
-    int pole[] = {4,6,7,19,23,25,67,123,1525};
-    printf("%d", binarni(pole, 9, 7));
+    int N;
+    scanf("%d", &N);
+    printf("%d",serazeno(N));
     return 0;
 }
