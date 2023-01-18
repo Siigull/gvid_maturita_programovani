@@ -69,13 +69,17 @@ bool jeFunkcni(float* pol, int n, float begin, float end){
 }
 
 // Newtonovy metody (bude zadána derivace vyšetřované funkce)
-float newton(){
-    return 0.0;
+float newton(float* pol, float* d, int n, float eps, float x){
+    float fx;
+    while(fabs(fx = horner(pol, n, x)) > eps)
+        x = x - fx / horner(d, n-1, x);
+    return x;
 }
 
 int main(){
     float f1[3] = {-5, 3.2, 7.5};
+    float fd[2] = {-10, 3.2};
     int n = 3;
-
+    printf("%f", newton(f1, fd, n, 0.0001, 2));
     return 0;
 }
