@@ -91,16 +91,18 @@ void prohod(char* x, char* y){
     *y = temp;
 }
 
-void reverzeRekurze(char* pole, int zacatek, int konec){
-    if(konec-zacatek < 1) return; 
-    prohod(&pole[zacatek], &pole[konec]);
-    reverzeRekurze(pole, zacatek+1, konec-1);
-}
+// void reverzeRekurze(char* pole, int zacatek, int konec){
+//     if(konec-zacatek < 1) return; 
+//     prohod(&pole[zacatek], &pole[konec]);
+//     reverzeRekurze(pole, zacatek+1, konec-1);
+// }
 
-void reverzeALT(char* pole, int index){
-    if(pole[index] = "\0") return;
-    reverzeALT(pole, index+1);
-    printf("%c", pole[index]);
+int reverzeRekurze(char* pole, int index){
+    if(pole[index] = "\0") return 0;
+    char t = pole[index];
+    int i = reverzeALT(pole, index+1);
+    pole[i] = t;
+    return i+1;
 }
 
 void reverzeCyklus(char* pole){
