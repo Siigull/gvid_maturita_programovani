@@ -121,11 +121,5 @@ int main(int argc, char **argv){
     //     nahraditel = argv[2];
     // }
 
-    char pole[] = {'a','b','c','d','e'};
-    
-    for(int i=0; i<5; i++) printf("%c", pole[i]);
-    reverzeRekurze(pole, 0, 4);
-    for(int i=0; i<5; i++) printf("%c", pole[i]);
-
     return 0;
 }
