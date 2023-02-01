@@ -103,7 +103,10 @@ void reverzeALT(char* pole, int index){
     printf("%c", pole[index]);
 }
 
-void reverzeCyklus(char* pole, int n){
+void reverzeCyklus(char* pole){
+    int n=0;
+    for(;pole[n] != '\0';n++){}
+
     for(int i=0; i<n/2; i++)
         prohod(&pole[i], &pole[n-i]);
 }
