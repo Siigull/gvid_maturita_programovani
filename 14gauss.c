@@ -76,13 +76,11 @@ void nejvetsiKoeficient(Tmatice *m, int sloupec){
 
 void odectiRadek(Tmatice *m, int radek, int sloupec){
     if(m->prvek[radek][sloupec] == 0) return;
-    float temp[m->delka];
-    for(int i=0; i<m->delka; i++){
-        temp[i] = m->prvek[radek][i] / m->prvek[sloupec][sloupec];
-    }
-    for(int i=sloupec; i<m->delka; i++){
-        m->prvek[radek][i] = temp[i] * m->prvek[sloupec][i] - m->prvek[radek][i];
-    }
+    
+    float temp = m->prvek[radek][sloupec] / m->prvek[sloupec][sloupec];
+
+    for(int i=sloupec; i<m->delka; i++)
+        m->prvek[radek][i] = m->prvek[radek][i] - temp * m->prvek[sloupec][i];
 }
 
 void zpetnyChod(Tmatice* m){
