@@ -68,7 +68,7 @@ bool jeSoustava(Tmatice* m){
 bool jeDominantni(Tmatice* m){
     for(int i=0; i<m->vyska; i++){
         float soucet = 0;
-        for(int j=0; i<m->vyska; i++){
+        for(int j=0; j<m->vyska; j++){
             if(i == j) continue;
             soucet += fabs(m->prvek[i][j]);
         }
@@ -99,7 +99,7 @@ void Jacob(Tmatice *m){
     float res[m->vyska][2];
     for(int i=0; i<m->vyska; i++){ res[i][0] = 0; res[i][1] = 0; }
 
-    if(!diagonalneDominantni(m)) return;
+    if(!jeDominantni(m)) return;
 
     vynuluj(m);
 
@@ -122,11 +122,13 @@ void Jacob(Tmatice *m){
     //vysledky
     printf("\n");
     for (size_t i=0; i<m->vyska; i++)
-        printf("%d.x: %f\n", i, res[i][1]);
+        printf("%zu.x: %f\n", i, res[i][1]);
 }
 
 int main(){
     Tmatice* m = nactiM();
+
+    Jacob(m);
 
     smazM(m);
     return 0;
