@@ -81,7 +81,7 @@ int soucetNeobvodovych(int pole[][maxArr], int x, int y){
 
 //zjisti součet prvků ve čtvrtinách matice, když každý rozměr rozdělíš celočíselným dělením 2
 int* soucetCtvrtin(int pole[][maxArr], int x, int y){
-    int vysledky[4];
+    int *vysledky = malloc(sizeof(int) * 4);
     for(int i=0; i<x; i++){
         for(int j=0; j<y; j++){
             if(i < x/2){
