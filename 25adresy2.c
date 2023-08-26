@@ -29,17 +29,18 @@ bool is_number(char* ip, int len) {
 }
 
 bool is_ip(char* ip) {
-    for(int i=0; i<4; i++) {
+    int i=0;
+    for(; i < 4; i++) {
         int x = strcspn(ip, ".\0");
-
-        if(ip[-1] == '\0') return false;
 
         if(!is_number(ip, x)) return false; 
 
         ip += x + 1;
+
+        if(ip[-1] == '\0') break;
     }
 
-    if(ip[-1] != '\0' || ip[-2] == '.') return false;
+    if(i != 3 || ip[-2] == '.') return false;
 
     return true;
 }
