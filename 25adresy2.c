@@ -20,6 +20,8 @@ bool jeMAC(char* vstup){
 }
 
 bool is_number(char* ip, int len) {
+    if(len == 0) return false;
+    
     for(int i=0; i<len; i++) 
         if(!isdigit(ip[i])) return false;
 
